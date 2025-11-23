@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
-
 on:
   push:
-    branches: ['main']
+    branches: 
+      - main
+      - documentation
   workflow_dispatch:
 
 permissions:
@@ -10,43 +11,26 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.2.23
-      
-      - name: Install dependencies
-        run: bun install
-      
-      - name: Build
-        run: bun run build
-      
-      - name: Add .nojekyll file
-        run: touch ./out/.nojekyll
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            export PATH=$PATH:/root/.bun/bin
+            source ~/.bashrc 2>/dev/null || true
+            cd /opt/website/
+            git pull origin ${{ github.ref_name }}
+            
+            BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+            COMMIT_HASH=$(git rev-parse --short HEAD)
+            echo "{\"branch\":\"$BRANCH_NAME\",\"commit\":\"$COMMIT_HASH\"}" > public/git-info.json
+            
+            bun run build
+            pm2 restart website
