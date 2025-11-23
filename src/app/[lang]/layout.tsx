@@ -33,6 +33,14 @@ export default async function RootLayout({
   const lang = (await params).lang;
   return (
     <html lang={lang}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "var _jipt = []; _jipt.push(['project', 'test-hytale-modding']);",
+          }}
+        ></script>
+        <script src="//cdn.crowdin.com/jipt/jipt.js"></script>
+      </head>
       <body>
         <RootProvider i18n={provider(lang)}>{children}</RootProvider>
       </body>
