@@ -1,7 +1,7 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import { defineI18nUI } from 'fumadocs-ui/i18n';
 import { i18n } from '@/lib/i18n';
-import './global.css';
+import '../global.css';
 import { Inter } from 'next/font/google';
 
 export const metadata = {
@@ -17,22 +17,23 @@ const { provider } = defineI18nUI(i18n, {
       displayName: 'English',
     },
     es: {
-      displayName: 'Spanish',
-      search: 'Buscar',
+      displayName: 'Español',
+      search: 'Buscar', 
     },
   },
 });
-export default async function Layout({
-  params,
+
+export default async function RootLayout({
   children,
+  params,
 }: {
-  params: Promise<Record<string, string | undefined>>;
   children: React.ReactNode;
+  params: { lang: string };
 }) {
-  const lang = (await params).lang ?? 'en';
+  const lang = (await params).lang;
   return (
-    <html lang={lang} className={inter.className} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
+    <html lang={lang}>
+      <body>
         <RootProvider i18n={provider(lang)}>{children}</RootProvider>
       </body>
     </html>
