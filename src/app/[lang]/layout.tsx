@@ -1,24 +1,20 @@
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import { defineI18nUI } from 'fumadocs-ui/i18n';
-import { i18n } from '@/lib/i18n';
-import '../global.css';
-import { Inter } from 'next/font/google';
-
-export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-};
+import { RootProvider } from "fumadocs-ui/provider/next";
+import { defineI18nUI } from "fumadocs-ui/i18n";
+import { Inter } from "next/font/google";
+import { i18n } from "@/lib/i18n";
+import "../global.css";
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ["latin"],
 });
 const { provider } = defineI18nUI(i18n, {
   translations: {
     en: {
-      displayName: 'English',
+      displayName: "English",
     },
     "es-ES": {
-      displayName: 'Español',
-      search: 'Buscar', 
+      displayName: "Español",
+      search: "Buscar",
     },
   },
 });
@@ -32,16 +28,8 @@ export default async function RootLayout({
 }) {
   const lang = (await params).lang;
   return (
-    <html lang={lang}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "var _jipt = []; _jipt.push(['project', 'test-hytale-modding']);",
-          }}
-        ></script>
-        <script src="//cdn.crowdin.com/jipt/jipt.js"></script>
-      </head>
-      <body>
+    <html lang={lang} className={inter.className} suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen">
         <RootProvider i18n={provider(lang)}>{children}</RootProvider>
       </body>
     </html>
