@@ -1,48 +1,33 @@
 ---
-title: Text Based Scripting (Server Plugins)
-description: An introduction to what we know of Hytale's text based scripting system as of writing this article.
+title: crwdns422:0crwdne422:0
+description: crwdns424:0crwdne424:0
 ---
 
-Hytale's modding capabilities include a text-based scripting system that allows modders
-to create custom behaviors, interactions, and game mechanics. While the full details of
-this system are not publicly documented as the game is still in development and not
-released, we can summarize what is currently known about it.
+crwdns426:0crwdne426:0 crwdns428:0crwdne428:0
 
-### Important Details of Modding in Hytale
+### crwdns430:0crwdne430:0
 
-Hytale's modding goes on server side and not client side, meaning that mods/plugins are
-hosted on the server and players connect to these modded servers to experience the custom content
-without needing to install anything on their end. This approach ensures a consistent experience
-for all players on a modded server.
+crwdns432:0crwdne432:0 crwdns434:0crwdne434:0
 
-### Overview of Text-Based Scripting
+### crwdns436:0crwdne436:0
 
-The text-based scripting system in Hytale is based on Java and the server plugins are JAR files.
+crwdns438:0crwdne438:0
 
-We're guessing this is done so that Minecraft modders can easily transition to Hytale modding,
-as Minecraft modding is also primarily Java-based. This allows modders familiar with Java
-to leverage their existing knowledge when creating mods for Hytale.
+crwdns440:0crwdne440:0 crwdns442:0crwdne442:0
 
-#### Singleplayer Concerns
+#### crwdns444:0crwdne444:0
 
-Despite the name, server plugins can also be used in singleplayer mode.
-Hytale's singleplayer mode runs a local server instance, allowing players to use server plugins
-even when playing alone. This means that mods created as server plugins can enhance the singleplayer experience as well.
+crwdns446:0crwdne446:0
+crwdns448:0crwdne448:0 crwdns450:0crwdne450:0
 
-### Mixin System
+### crwdns452:0crwdne452:0
 
-Mixins were used in Minecraft modding to directly modify the game’s code, even able to overwrite
-or redirect logic and values. An extremely powerful but somewhat brittle system which depends
-on the source code/game version staying pretty much the same.
+crwdns454:0crwdne454:0 crwdns456:0crwdne456:0
 
-We have no official information on Mixins in Hytale. Despite that, we have reason to believe they will not
-need to be supported for the following reasons:
+crwdns458:0crwdne458:0 crwdns460:0crwdne460:0
 
-1. For a properly designed game, 95% of Mixin use cases can be solved with a good API instead.
-   In fact, many Minecraft modding APIs simply mixin to provide the API so the developers using
-   those APIs don’t have to write the mixin themselves.
-   - This is typically replacing hardcoded values and overwriting hardcoded behaviors.
-   - Hytale should ideally make these both API or data-driven.
-2. APIs can also be much more resilient than the game version. We can have a separate API
-   version system which means the same code will not need to be modified across multiple updates
-   until the API changes in a breaking way.
+1. crwdns462:0crwdne462:0
+   crwdns464:0crwdne464:0
+   * crwdns466:0crwdne466:0
+   * crwdns468:0crwdne468:0
+2. crwdns470:0crwdne470:0 crwdns472:0crwdne472:0
