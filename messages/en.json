@@ -1,19 +1,17 @@
 {
 	"nav": {
-		"title": "Hytale Modding",
-		"documentation": "Documentation"
+		"title": "crwdns614:0crwdne614:0",
+		"documentation": "crwdns616:0crwdne616:0"
 	},
-
 	"home": {
-		"community": "Community",
-		"title": "Hytale Modding",
-		"welcome": "Welcome to Hytale Modding!",
-		"welcomeDescription": "This is an unofficial community for modding Hytale, providing guides, documentation, and resources.",
-		"documentation": "Documentation",
-		"discord": "Discord"
+		"community": "crwdns618:0crwdne618:0",
+		"title": "crwdns620:0crwdne620:0",
+		"welcome": "crwdns622:0crwdne622:0",
+		"welcomeDescription": "crwdns624:0crwdne624:0",
+		"documentation": "crwdns626:0crwdne626:0",
+		"discord": "crwdns628:0crwdne628:0"
 	},
-
 	"misc": {
-		"gitInfoUnavailable": "Git info not available"
+		"gitInfoUnavailable": "crwdns630:0crwdne630:0"
 	}
 }
