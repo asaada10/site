@@ -3,19 +3,19 @@
 import { Users, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getMessages, localizeHref } from '@/lib/locale';
+import { localizeHref } from '@/lib/locale';
+import { useMessages } from '@/lib/hooks/useMessages';
 import { useParams } from 'next/navigation';
 
 export default function HomePage() {
   const [gitInfo, setGitInfo] = useState({ branch: 'main', commit: 'abc1234' });
   const params = useParams();
-  const locale = params?.lang ?? "en";
-  const messages = getMessages(locale.toString());
+  const messages = useMessages();
   useEffect(() => {
     fetch('/git-info.json')
       .then(res => res.json())
       .then(data => setGitInfo(data))
-      .catch(() => console.log(messages?.misc?.gitInfoUnavailable ?? "Git info not available"));
+      .catch(() => console.log(messages.misc.gitInfoUnavailable));
   }, []);
   return (
     <div className="font-grotesk flex flex-col justify-center items-center min-h-[calc(100vh-4rem)] px-4 relative overflow-hidden">
@@ -47,24 +47,23 @@ export default function HomePage() {
         <div className="inline-flex items-center gap-2">
           <Users className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           <span className="font-azeret text-sm font-medium text-slate-600 dark:text-slate-400">
-            {messages?.home?.community ?? "Community"}
+            {messages.home.community}
           </span>
         </div>
         <h1 className="text-6xl font-medium p-2 md:text-7xl font-bold tracking-wide bg-gradient-to-b from-slate-500 to-slate-900 dark:from-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
-          {messages?.home?.title ?? "Hytale Modding"}
+          {messages.home.title}
         </h1>
         <div className="w-64 h-1 bg-orange-300 mx-auto rounded-sm" />
         <p className="text-lg p-2 md:text-xl text-slate-600 dark:text-slate-400 font-light leading-relaxed max-w-2xl mx-auto">
-          {messages?.home?.welcome ?? "Welcome to Hytale Modding!"}
+          {messages.home.welcome}
           <span className="font-bold">
             {" "}
-            {messages?.home?.welcomeDescription ??
-              " This is an unofficial community for modding Hytale, providing guides, documentation, and resources."}
+            {messages.home.welcomeDescription}
           </span>
         </p>
         <div className="flex flex-col items-center justify-center gap-4">
           <Link
-            href={localizeHref("/docs")}
+            href={localizeHref("/docs", params.lang?.toString())}
             className={`
                 inline-flex items-center gap-3 px-4 py-2 text-base md:text-lg rounded-md
                 bg-[#f3e1c9] text-[#a15b00]
@@ -77,7 +76,7 @@ export default function HomePage() {
           >
             <BookOpen className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />
             <span className="text-base md:text-lg">
-              {messages?.home?.documentation ?? "Documentation"}
+              {messages.home.documentation}
             </span>
           </Link>
 
@@ -112,7 +111,7 @@ export default function HomePage() {
               />
             </svg>
             <span className="text-base md:text-lg">
-              {messages?.home?.discord ?? "Discord"}
+              {messages.home.discord}
             </span>
           </a>
         </div>

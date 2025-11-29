@@ -1,9 +1,8 @@
 import { i18n } from "./i18n";
 import en from "../../messages/en.json";
 
-const messages: Record<string, any> = {
-  en,
-};
+export type Messages = typeof en;
+const messages: Record<string, Messages> = { en };
 
 export function getLocale(routeLang?: string) {
   const isSupported = (l?: string): l is (typeof i18n.languages)[number] => {
@@ -21,10 +20,9 @@ export function localizeHref(href: string, routeLang?: string) {
   return `/${locale}${href.startsWith("/") ? href : "/" + href}`;
 }
 
-export function getMessages(locale?: string) {
+export function getMessages(locale?: string): Messages {
   const validLocale = getLocale(locale);
   if (!messages[validLocale]) loadLanguage(validLocale);
-  
   return messages[validLocale] || messages.en;
 }
 
