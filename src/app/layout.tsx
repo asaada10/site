@@ -1,16 +1,15 @@
-import { RootProvider } from "fumadocs-ui/provider/next";
-import "./global.css";
 import { Inter } from "next/font/google";
+import "./global.css";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function Layout({ children }: LayoutProps<"/">) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html className={inter.className} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+        {children}
       </body>
     </html>
   );

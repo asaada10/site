@@ -1,0 +1,17 @@
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { source } from '@/lib/source';
+import { baseOptions } from '@/lib/layout.shared';
+import { DocsBanner } from './docs-banner';
+
+export default async function Layout({ params, children }: LayoutProps<'/[lang]/docs'>) {
+  const { lang } = await params;
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <DocsBanner />
+      <DocsLayout tree={source.pageTree[lang]} {...baseOptions(lang)}>
+        {children}
+      </DocsLayout>
+    </div>
+  );
+}
