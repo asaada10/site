@@ -22,5 +22,17 @@ export function localizeHref(href: string, routeLang?: string) {
 }
 
 export function getMessages(locale?: string) {
-  return messages[locale || i18n.defaultLanguage] || messages[i18n.defaultLanguage];
+  const validLocale = getLocale(locale);
+  if (!messages[validLocale]) loadLanguage(validLocale);
+  
+  return messages[validLocale] || messages.en;
+}
+
+export function loadLanguage(locale: string) {
+  const validLocale = getLocale(locale);
+
+  try {
+    const loadedMessages = require(`../../messages/${validLocale}.json`);
+    messages[validLocale] = loadedMessages;
+  } catch { }
 }
