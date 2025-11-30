@@ -12,7 +12,11 @@ export default async function Layout({
   return (
     <div className="flex min-h-screen flex-col">
       <DocsBanner />
-      <DocsLayout tree={source.pageTree[lang]} {...baseOptions(lang)}>
+      <DocsLayout
+        tree={source.pageTree[lang]}
+        {...baseOptions(lang)}
+        githubUrl="https://github.com/HytaleModding/site"
+      >
         {children}
       </DocsLayout>
     </div>

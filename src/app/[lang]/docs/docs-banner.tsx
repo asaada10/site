@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { branch, commit } from "@/git-info.json";
 import Link from "next/link";
 import { ExternalLinkIcon, AlertTriangle } from "lucide-react";

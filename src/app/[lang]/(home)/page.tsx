@@ -1,7 +1,7 @@
+"use client";
 import { Users, BookOpen, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { branch, commit } from "@/git-info.json";
-import { useEffect, useState } from "react";
 import { localizeHref } from "@/lib/locale";
 import { useMessages } from "@/lib/hooks/useMessages";
 import { useParams } from "next/navigation";
@@ -19,6 +19,9 @@ export default function HomePage() {
       >
         <div className="flex items-center gap-1.5">
           <ExternalLinkIcon className="size-4" />
+          <span className="font-medium text-slate-700 dark:text-slate-300">
+            {branch}
+          </span>
         </div>
         <span className="text-slate-400 dark:text-slate-500">@</span>
         <span className="text-slate-600 dark:text-slate-400">{commit}</span>
@@ -84,6 +87,10 @@ export default function HomePage() {
             </span>
           </a>
         </div>
+      </div>
+      {/* Copyright Footer */}
+      <div className="absolute bottom-4 left-4 z-10 text-xs text-slate-900 dark:text-slate-900">
+        © {new Date().getFullYear()} Hytale Modding
       </div>
     </div>
   );
