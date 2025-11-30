@@ -1,47 +1,27 @@
-"use client";
-
-import { Users, BookOpen } from "lucide-react";
+import { Users, BookOpen, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
+import { branch, commit } from "@/git-info.json";
 import { useEffect, useState } from "react";
 import { localizeHref } from "@/lib/locale";
 import { useMessages } from "@/lib/hooks/useMessages";
 import { useParams } from "next/navigation";
 
 export default function HomePage() {
-  const [gitInfo, setGitInfo] = useState({ branch: "main", commit: "abc1234" });
   const params = useParams();
   const messages = useMessages();
-  useEffect(() => {
-    fetch("/git-info.json")
-      .then((res) => res.json())
-      .then((data) => setGitInfo(data))
-      .catch(() => console.log(messages.misc.gitInfoUnavailable));
-  }, []);
   return (
     <div className="font-grotesk relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center overflow-hidden px-4">
       <a
-        href="https://github.com/HytaleModding/site"
+        href={`https://github.com/HytaleModding/site/tree/${branch}`}
         target="_blank"
         rel="noopener noreferrer"
         className="absolute right-4 bottom-4 z-10 flex cursor-pointer items-center gap-2 rounded-md border border-slate-300 bg-slate-100 px-3 py-1.5 font-mono text-xs transition-colors duration-150 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
       >
         <div className="flex items-center gap-1.5">
-          <svg
-            className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11.5 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1h2.293L8.146 1.354a.5.5 0 0 1 .708-.708L11 2.793V.5a.5.5 0 0 1 .5-.5z" />
-            <path d="M5 2.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 11.5 14h-9A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2h2a.5.5 0 0 1 .5.5z" />
-          </svg>
-          <span className="font-medium text-slate-700 dark:text-slate-300">
-            {gitInfo.branch}
-          </span>
+          <ExternalLinkIcon className="size-4" />
         </div>
         <span className="text-slate-400 dark:text-slate-500">@</span>
-        <span className="text-slate-600 dark:text-slate-400">
-          {gitInfo.commit}
-        </span>
+        <span className="text-slate-600 dark:text-slate-400">{commit}</span>
       </a>
 
       <div
